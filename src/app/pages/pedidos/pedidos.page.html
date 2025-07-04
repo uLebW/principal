@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mis Pedidos</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isLoading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando tus pedidos...</p>
+  </div>
+
+  <div *ngIf="!isLoading && errorMe" class="error-container">
+    <ion-icon name="alert-circle-outline" size="large" color="danger"></ion-icon>
+    <p>{{ errorMe }}</p>
+    <ion-button (click)="loadPedidos()" fill="outline">Reintentar</ion-button>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMe && pedidos.length === 0" class="empty-state">
+    <ion-icon name="cube-outline" size="large" color="medium"></ion-icon>
+    <p>Aún no tienes pedidos realizados.</p>
+    <ion-button routerLink="/home" fill="outline">Explorar Productos</ion-button>
+  </div>
+
+  <ion-list *ngIf="!isLoading && !errorMe && pedidos.length > 0">
+    <ion-card *ngFor="let pedido of pedidos">
+      <ion-card-header>
+        <ion-card-title>Pedido #{{ pedido.id_pedido.substring(0, 8) }}...</ion-card-title>
+        <ion-card-subtitle>Fecha: {{ formatDate(pedido.fecha_pedido) }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Dirección de Envío:</strong> {{ pedido.direccion }}</p>
+        <p><strong>Total del Pedido:</strong> ${{ pedido.total | number:'1.2-2' }}</p>
+
+        <ion-item-divider>
+          <ion-label>Productos</ion-label>
+        </ion-item-divider>
+
+        <ion-list lines="none">
+          <ion-item *ngFor="let item of pedido.items_pedido">
+            <ion-thumbnail slot="start" *ngIf="item.producto?.imagen_url">
+              <img [src]="item.producto.imagen_url" [alt]="item.producto.nombre">
+            </ion-thumbnail>
+            <ion-label>
+              <h2>{{ item.producto?.nombre || 'Producto Desconocido' }}</h2>
+              <p>Cantidad: {{ item.cantidad }}</p>
+              <p>Precio Unitario: ${{ item.precio_unitario | number:'1.2-2' }}</p>
+            </ion-label>
+            <ion-text slot="end" color="primary">
+              ${{ (item.cantidad * item.precio_unitario) | number:'1.2-2' }}
+            </ion-text>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

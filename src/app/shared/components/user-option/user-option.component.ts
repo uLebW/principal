@@ -39,4 +39,9 @@ export class UserOptionComponent implements OnInit {
     await this.supabaseService.cerrarSesion();
   }
 
+  async goToPedidos(){
+    await this.popoverController.dismiss()
+    this.router.navigateByUrl('/pedidos');
+  }
+
 }

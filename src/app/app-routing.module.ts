@@ -43,6 +43,10 @@ const routes: Routes = [
     path: 'completar-perfil',
     loadChildren: () => import('./pages/completar-perfil/completar-perfil.module').then( m => m.CompletarPerfilPageModule)
   },
+  {
+    path: 'pedidos',
+    loadChildren: () => import('./pages/pedidos/pedidos.module').then( m => m.PedidosPageModule)
+  },
 ];
 
 @NgModule({
