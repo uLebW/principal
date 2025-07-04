@@ -5,18 +5,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CambiarConPageRoutingModule } from './cambiar-con-routing.module';
+import { ActualizarContraPageRoutingModule } from './actualizar-contra-routing.module';
 
-import { CambiarConPage } from './cambiar-con.page';
+import { ActualizarContraPage } from './actualizar-contra.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CambiarConPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ActualizarContraPageRoutingModule
   ],
-  declarations: [CambiarConPage]
+  declarations: [ActualizarContraPage]
 })
-export class CambiarConPageModule {}
+export class ActualizarContraPageModule {}

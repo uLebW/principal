@@ -56,10 +56,6 @@ export class SupabaseService {
     return this.supabase.auth.signInWithPassword(credenciales)
   }
 
-  reiniciarPw(email) {
-    return this.supabase.auth.resetPasswordForEmail(email)
-  }
-
   async cerrarSesion() {
     await this.supabase.auth.signOut()
   }
@@ -126,6 +122,25 @@ export class SupabaseService {
       throw error;
     }
     return data;
+  }
+
+  //Funciones para el cambio de constraeña
+
+  async requestPasswordReset(email: string, redirectTo: string): Promise<any> {
+    const { data, error } = await this.supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: redirectTo,
+    });
+    return { data, error };
+  }
+  async updatePassword(newPassword: string): Promise<any>{
+    const {data, error} = await this.supabase.auth.updateUser({password: newPassword});
+    return {data,error};
+  }
+
+  onAuthChange(callback: (event: string, session: any) => void){
+    return this.supabase.auth.onAuthStateChange((event, session)=>{
+      callback(event,session);
+    })
   }
 }
 

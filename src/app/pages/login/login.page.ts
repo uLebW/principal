@@ -64,32 +64,7 @@ export class LoginPage implements OnInit {
 
 
   async olvidarContr() {
-    const alert = await this.alerta.create({
-      header: "Recibe una nueva contraseña",
-      message: "Ponga su correo",
-      inputs: [{
-        type: "email",
-        name: "email"
-      }],
-      buttons: [{
-        text: "Cancelar",
-        role: "cancel",
-      }, {
-        text: "Cambia contraseña",
-        handler: async (result) => {
-          const lod = await this.loaadin.create();
-          await lod.present();
-          const { data, error } = await this.authService.reiniciarPw(result.email);
-          await lod.dismiss();
-          if (error) {
-            this.showAlert("Error", error.message);
-          } else {
-            this.showAlert("Enviado", "Vea su correo para más instrucciones");
-          };
-        }
-      }]
-    });
-    await alert.present();
+   this.router.navigateByUrl('/actualizar-contra');
   }
 
   ngOnInit() {

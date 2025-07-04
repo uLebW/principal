@@ -47,6 +47,10 @@ const routes: Routes = [
     path: 'pedidos',
     loadChildren: () => import('./pages/pedidos/pedidos.module').then( m => m.PedidosPageModule)
   },
+  {
+    path: 'actualizar-contra',
+    loadChildren: () => import('./pages/actualizar-contra/actualizar-contra.module').then( m => m.ActualizarContraPageModule)
+  },
 ];
 
 @NgModule({
