@@ -1,0 +1,142 @@
+<ion-header>
+  <ion-toolbar style="color: black; --background:aliceblue;">
+    <ion-button expand="block" color="success" fill="outline" slot="start" routerLink="/home">
+      Regresar
+    </ion-button>
+    <ion-title>Perfil de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-start">
+      <ion-col size="auto">
+        <div class="profile-pic-container">
+          <!-- Muestra el avatar o un placeholder -->
+          <ion-img [src]="avatarUrl" alt="Avatar" class="profile-pic" onerror="this.src='https://placehold.co/120x120/aec9f5/000?text=Avatar'" />
+
+          <!-- Input para subir un nuevo avatar -->
+          <input type="file" id="avatarInput" (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+          <ion-button size="small" (click)="fileInput.click()" class="upload-button">
+            <ion-icon name="camera-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+        </div>
+      </ion-col>
+      <ion-col>
+        <!-- Formulario del perfil usando FormGroup -->
+        <form [formGroup]="profileForm">
+          <ion-item>
+            <ion-input label="Nombre" label-placement="floating" placeholder="Tu nombre" formControlName="nombre"></ion-input>
+          </ion-item>
+          <div *ngIf="profileForm.get('nombre')?.touched && profileForm.get('nombre')?.errors?.['required']"
+            class="error-message">
+            El nombre es requerido.
+          </div>
+
+          <ion-item>
+            <ion-input label="Apellidos" label-placement="floating" placeholder="Tus apellidos" formControlName="apellido"></ion-input>
+          </ion-item>
+          <div *ngIf="profileForm.get('apellido')?.touched && profileForm.get('apellido')?.errors?.['required']"
+            class="error-message">
+            El apellido es requerido.
+          </div>
+
+          <ion-item>
+            <ion-input label="Teléfono" label-placement="floating" type="tel" placeholder="Tu teléfono" formControlName="telefono"></ion-input>
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list-header>
+          <ion-label style="color: black; font-size: large;">Direcciones</ion-label>
+          <ion-button fill="outline" color="light" (click)="agregarDirec()">
+            Nueva dirección +
+          </ion-button>
+        </ion-list-header>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="mostrarDireccForm">
+      <ion-col>
+        <ion-card>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12" size-md="6">
+                  <ion-item>
+                    <ion-input label="Calle" label-placement="floating" placeholder="Calle"
+                      [(ngModel)]="actualDirec.calle"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" size-md="6">
+                  <ion-item>
+                    <ion-input label="Estado" label-placement="floating" placeholder="Estado"
+                      [(ngModel)]="actualDirec.estado"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-input label="Num. Interior" label-placement="floating" placeholder="Núm. Interior"
+                      [(ngModel)]="actualDirec.numInt"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-input label="Num. Exterior" label-placement="floating" placeholder="Núm. Exterior"
+                      [(ngModel)]="actualDirec.numExt"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12" size-md="6">
+                  <ion-item>
+                    <ion-input label="Colonia" label-placement="floating" placeholder="Colonia"
+                      [(ngModel)]="actualDirec.colonia"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" size-md="6">
+                  <ion-item>
+                    <ion-input label="Ciudad" label-placement="floating" placeholder="Ciudad"
+                      [(ngModel)]="actualDirec.ciudad"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12" size-md="6">
+                  <ion-item>
+                    <ion-input label="Código Postal" label-placement="floating" placeholder="Código Postal"
+                      [(ngModel)]="actualDirec.codPostal"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" size-md="6" class="ion-align-self-end">
+                  <ion-button expand="block" (click)="guaradrDirec()">Guardar Dirección</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <!-- Itera sobre las direcciones cargadas -->
+        <app-carta-direcion *ngFor="let address of addresses" [address]="address" (editar)="editarDirec($event)"
+          (elimianr)="eliminarDirec($event)"></app-carta-direcion>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar style="--background:aliceblue">
+    <ion-button expand="block" color="light" (click)="saveProfile()" [disabled]="profileForm.invalid">Guardar Cambios</ion-button>
+  </ion-toolbar>
+</ion-footer>

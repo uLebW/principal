@@ -1,0 +1,163 @@
+
+
+ion-header {
+  ion-toolbar {
+    --background: aliceblue;
+    color: black; // Light gray background for the toolbar
+    --border-width: 0; // Remove default border if any
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      font-size: 0.9em;
+      color: #666;
+
+      span {
+        margin-right: 5px;
+      }
+
+      ion-icon {
+        font-size: 0.8em;
+        margin-right: 5px;
+      }
+    }
+
+    ion-icon {
+      font-size: 1.5em; // Adjust icon size as needed
+      color: #333; // Icon color
+    }
+  }
+}
+
+ion-content {
+  --background: rgb(188, 218, 218);
+  .product-card {
+    background: #fff;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; // Ensures image corners are rounded with parent
+
+    @media (min-width: 768px) {
+      flex-direction: row; // For larger screens, side-by-side layout
+      .product-image {
+        flex: 1;
+        padding: 20px;
+      }
+      .product-details {
+        flex: 1;
+        padding: 20px;
+      }
+    }
+  }
+
+  .product-image {
+    padding: 10px; // Add some padding around the image
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px; // Slightly rounded corners for the image
+    }
+  }
+
+  .product-details {
+    padding: 15px;
+
+    h1 {
+      font-size: 1.8em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    h2 {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-top: 15px;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        font-size: 1em;
+        margin-bottom: 5px;
+        color: #4d4c4c;
+        display: flex;
+        align-items: center;
+
+        // Optional: add a bullet point icon
+        &::before {
+          content: "•";
+          color: #000b18; // A nice blue for bullet
+          font-weight: bold;
+          display: inline-block;
+          width: 1em;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .price-section {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .price {
+        font-size: 2em;
+        font-weight: bold;
+        color: #e60000; // Red for the main price
+      }
+
+      .installments {
+        font-size: 1em;
+        color: #888;
+        margin-top: 5px;
+      }
+    }
+  }
+
+  ion-card{
+    --background:aliceblue;
+  }
+
+  .star-ratings {
+    margin: 20px;
+    display: flex;
+    justify-content: flex-start; // Align stars to the left
+    padding-bottom: 20px; // Add some space below the stars
+
+    ion-icon {
+      color: #ffc107; // Gold color for stars
+      font-size: 1.5em;
+      margin-right: 2px;
+    }
+  }
+
+    .loading-container,
+  .error-container {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+  }
+
+  .loading-container ion-spinner {
+    width: 50px;
+    height: 50px;
+  }
+
+  .error-container ion-icon {
+    margin-bottom: 10px;
+  }
+}

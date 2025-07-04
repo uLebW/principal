@@ -1,0 +1,64 @@
+<ion-content class="ion-padding">
+  <div class="centro">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Crea tu cuenta</ion-card-title>
+        <ion-card-subtitle>Para tener acceso a los mejores prodcutos</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form [formGroup]="registerForm" (ngSubmit)="PaosUnoRegistro()">
+
+          <ion-item>
+            <ion-input label="Email" labelPlacement="stacked" formControlName="email" type="email"
+              placeholder="Ingresa tu email"></ion-input>
+          </ion-item>
+          <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['required']"
+            class="error-message">
+            El email es requerido.
+          </div>
+          <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']"
+            class="error-message">
+            Ingresa un email válido.
+          </div>
+
+          <ion-item>
+            <ion-input label="Contraseña" labelPlacement="stacked" formControlName="password" type="password"
+              placeholder="Crea tu contraseña"></ion-input>
+          </ion-item>
+          <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['required']"
+            class="error-message">
+            La contraseña es requerida.
+          </div>
+          <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['minlength']"
+            class="error-message">
+            La contraseña debe tener al menos 6 caracteres.
+          </div>
+
+
+          <ion-button expand="block" fill="outline" class="create-account-button" type="submit"
+            [disabled]="registerForm.invalid">
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+            CREAR CUENTA
+          </ion-button>
+          <div>
+            <ion-text>¿Ya tienes una cuenta?</ion-text>
+            <ion-button expand="block" class="sign-in-button" routerLink="/login">
+              INICIA SESION
+            </ion-button>
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<style>
+  .error-message {
+    color: var(--ion-color-danger);
+    font-size: 0.8em;
+    margin-top: 5px;
+    margin-left: 16px;
+    /* Alinea con el inicio del input */
+  }
+</style>

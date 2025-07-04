@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Completa tu Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="centro">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>¡Casi listo!</ion-card-title>
+        <ion-card-subtitle>Completa tu información para empezar</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form [formGroup]="FormPerfil" (ngSubmit)="guardar()">
+
+          <ion-item>
+            <ion-input label="Nombre" labelPlacement="stacked" formControlName="nombre" type="text"
+              placeholder="Ingresa tu nombre"></ion-input>
+          </ion-item>
+          <div *ngIf="FormPerfil.get('nombre')?.touched && FormPerfil.get('nombre')?.errors?.['required']"
+            class="error-message">
+            El nombre es requerido.
+          </div>
+
+          <ion-item>
+            <ion-input label="Apellido" labelPlacement="stacked" formControlName="apellido" type="text"
+              placeholder="Ingresa tu apellido"></ion-input>
+          </ion-item>
+          <div *ngIf="FormPerfil.get('apellido')?.touched && FormPerfil.get('apellido')?.errors?.['required']"
+            class="error-message">
+            El apellido es requerido.
+          </div>
+
+          <ion-item>
+            <ion-input label="Teléfono" labelPlacement="stacked" formControlName="telefono" type="tel"
+              placeholder="Ingresa tu teléfono"></ion-input>
+          </ion-item>
+          <ion-button expand="block" class="complete-profile-button" type="submit" [disabled]="FormPerfil.invalid">
+            <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+            FINALIZAR REGISTRO
+          </ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

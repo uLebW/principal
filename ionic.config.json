@@ -1,0 +1,7 @@
+{
+  "name": "DWIDesarrollo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

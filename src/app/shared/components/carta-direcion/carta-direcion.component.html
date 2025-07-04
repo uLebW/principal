@@ -1,0 +1,17 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title style="color: black;">{{ address.calle }} {{ address.numExt }}</ion-card-title>
+    <ion-card-subtitle style="color: rgb(48, 47, 47);">{{ address.colonia }}, {{ address.ciudad }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{ address.estado }}, {{ address.codPostal }}</p>
+    <ion-buttons slot="end">
+      <ion-button (click)="clickEditar()">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" (click)="clickEliminar()">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-card-content>
+</ion-card>

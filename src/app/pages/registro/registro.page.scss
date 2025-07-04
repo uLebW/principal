@@ -1,0 +1,68 @@
+.centro{
+    max-width: 40cap;
+    padding: 20px;
+    margin: 0 auto; /* ¡Esto lo centra horizontalmente! */
+    justify-content: center;
+    align-items: center;
+  
+}
+
+ion-content{
+    --background: rgb(188, 218, 218);
+}
+ion-card {
+    max-width: 500px; /* Limita el ancho de la tarjeta en pantallas grandes */
+    background-color: aliceblue;
+    margin: 100px auto; /* Centra la tarjeta horizontalmente y le da margen */
+    box-shadow: 0 25px 25px rgba(0, 0, 0, 0.1); /* Sombra sutil para la tarjeta */
+  }
+
+  ion-card-header {
+    text-align: center;
+    padding-bottom: 0; /* Elimina padding extra si no es necesario */
+  }
+
+  ion-card-title {
+    font-size: 1.8em; /* Hace el título más grande */
+    margin-bottom: 10px;
+    color: #000;
+  }
+
+  ion-card-content {
+    padding-top: 0; /* Elimina padding extra si no es necesario */
+  }
+
+ion-input {
+  color: #000;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+ion-list {
+  background: transparent; // Ensure the list itself doesn't have a background
+  margin-bottom: 20px; // Space below the input fields
+}
+
+ion-item {
+  --background: #ffffff; // White background for input fields
+  --border-radius: 8px; // Slightly rounded corners for input fields
+  margin-bottom: 10px; // Space between input fields
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow
+  --padding-start: 10px; // Adjust padding if needed
+  --padding-end: 10px;
+}
+
+  .sign-in-button {
+  --background: #a2e8c6; 
+  --background-activated: #38eb91;
+  --color: #000; 
+}
+
+.create-account-button {
+  --background: #46f079; 
+  --border-color: #515251; 
+  --color: #000000; 
+  --border-width: 2px; 
+}

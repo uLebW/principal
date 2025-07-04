@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="color: black;" slot="start">
+      Inicio
+    </ion-title>
+    <div class="contBusq">
+    <ion-searchbar style="--background:rgb(188, 218, 218); color: black;" search-icon="search-circle-outline" slot="start"></ion-searchbar>
+    <ion-button fill="clear" slot="end">
+      <ion-icon name="funnel-outline" style="color: black;" size="large"></ion-icon>
+    </ion-button>
+  </div>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon name="person" size="large" style="padding-right:15px; color: black;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main-content-layout">
+
+    <div class="daily-recommendation-block">
+      <ion-card class="recom">
+        <ion-card-header>
+          <ion-card-title style="color: black;">Recomendación del día</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <img src="assets/img/laptop-recommendation.jpg" alt="Laptop recomendada" />
+          <p>¡No te pierdas esta oferta increíble!</p>
+          <ion-button expand="block" routerLink="/pagina-producto">Ver producto</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="cargandoProd" class="message-container">
+      <ion-spinner name="circles"></ion-spinner>
+      <p>Cargando productos...</p>
+    </div>
+
+    <div *ngIf="errorCarga" class="message-container error-message">
+      <ion-icon name="alert-circle-outline" size="large" color="danger"></ion-icon>
+      <p>Hubo un error al cargar los productos. Por favor, intente de nuevo.</p>
+      <ion-button (click)="cargaproductos()" fill="outline">Recargar</ion-button>
+    </div>
+
+    <div class="product-grid-container" *ngIf="!cargandoProd && !errorCarga && productos.length > 0">
+      <ion-card *ngFor="let producto of productos" class="elevatable-card" [routerLink]="['/pagina-producto', producto.id]">
+        <img [src]="producto.imagen_url" [alt]="producto.nombre" />
+        <ion-card-content>
+          <ion-card-title>{{ producto.nombre }}</ion-card-title>
+          <p class="product-price">${{ producto.precio | number:'1.2-2' }}</p>
+          <p class="product-description">{{ producto.descripcion }}</p>
+          <div class="rating">
+            <ion-icon *ngFor="let star of getEstrellas(producto.calificacion)" [name]="star" color="warning"></ion-icon>
+          </div>
+          <ion-button expand="block" fill="solid" size="small" [routerLink]="['/pagina-producto', producto.id]">Ver detalles</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="!cargandoProd && !errorCarga && productos.length === 0" class="message-container">
+      <p>No se encontraron productos.</p>
+      <ion-button (click)="cargaproductos()" fill="outline">Cargar productos</ion-button>
+    </div>
+
+  </div>
+</ion-content>

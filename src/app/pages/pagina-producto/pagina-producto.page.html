@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <span *ngIf="producto">{{ producto.nombre }}</span>
+    </ion-title>
+    <ion-button expand="block" color="success" fill="outline" slot="start" routerLink="/home">
+      Regresar
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="cargando" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando detalles del producto...</p>
+  </div>
+
+  <div *ngIf="!cargando && mensajeError" class="error-container">
+    <ion-icon name="alert-circle-outline" size="large" color="danger"></ion-icon>
+    <p>{{ mensajeError }}</p>
+    <ion-button (click)="cargandoDetalles()" fill="outline">Reintentar</ion-button>
+  </div>
+
+  <div *ngIf="!cargando && !mensajeError && producto">
+    <ion-card>
+      <div class="product-card">
+        <div class="product-image">
+          <img [src]="producto.imagen_url" [alt]="producto.nombre" />
+        </div>
+        <div class="product-details">
+          <h1>{{ producto.nombre }}</h1>
+          <h2>Características</h2>
+          <p>{{ producto.descripcion }}</p>
+          <div class="price-section">
+            <span class="price">${{ producto.precio | number:'1.2-2' }}</span>
+            <span class="installments">o a ${{ (producto.precio / 9) | number:'1.2-2' }} por 9 meses</span>
+          </div>
+        </div>
+      </div>
+      <div class="star-ratings">
+        <ion-icon *ngFor="let star of getEstrellas(producto.calificacion)" [name]="star" color="warning"></ion-icon>
+      </div>
+    </ion-card>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!cargando && !mensajeError && producto">
+    <ion-fab-button color="primary" (click)="addToCart(producto)">
+      <ion-icon name="cart-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
