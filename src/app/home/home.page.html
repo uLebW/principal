@@ -4,8 +4,11 @@
       Inicio
     </ion-title>
     <div class="contBusq">
-    <ion-searchbar style="--background:rgb(188, 218, 218); color: black;" search-icon="search-circle-outline" slot="start"></ion-searchbar>
-    <ion-button fill="clear" slot="end">
+    <ion-searchbar style="--background:rgb(188, 218, 218); color: black;" search-icon="search-circle-outline" slot="start"
+    (ionInput)="onSearch($event)"
+    [(ngModel)]="searchTerm"
+    debounce="500"></ion-searchbar>
+    <ion-button fill="clear" slot="end" (click)="presentFilterPopover($event)">
       <ion-icon name="funnel-outline" style="color: black;" size="large"></ion-icon>
     </ion-button>
   </div>
@@ -32,8 +35,8 @@
       <ion-button (click)="cargaproductos()" fill="outline">Recargar</ion-button>
     </div>
 
-    <div class="product-grid-container" *ngIf="!cargandoProd && !errorCarga && productos.length > 0">
-      <ion-card *ngFor="let producto of productos" class="elevatable-card" [routerLink]="['/pagina-producto', producto.id]">
+      <div class="product-grid-container" *ngIf="!cargandoProd && !errorCarga && filterPrd.length > 0">
+      <ion-card *ngFor="let producto of filterPrd" class="elevatable-card" [routerLink]="['/pagina-producto', producto.id]">
         <img [src]="producto.imagen_url" [alt]="producto.nombre" />
         <ion-card-content>
           <ion-card-title>{{ producto.nombre }}</ion-card-title>
@@ -47,7 +50,7 @@
       </ion-card>
     </div>
 
-    <div *ngIf="!cargandoProd && !errorCarga && productos.length === 0" class="message-container">
+    <div *ngIf="!cargandoProd && !errorCarga && filterPrd.length === 0" class="message-container">
       <p>No se encontraron productos.</p>
       <ion-button (click)="cargaproductos()" fill="outline">Cargar productos</ion-button>
     </div>

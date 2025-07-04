@@ -1,0 +1,15 @@
+<ion-list>
+  <ion-list-header>
+    <ion-label>Filtrar por Categoría</ion-label>
+  </ion-list-header>
+
+  <ion-item (click)="selectCategory(null)" [class.selected]="selectedCategoryId === null">
+    <ion-label>Todas las categorías</ion-label>
+    <ion-icon *ngIf="selectedCategoryId === null" slot="end" name="checkmark-circle-outline"></ion-icon>
+  </ion-item>
+
+  <ion-item *ngFor="let category of categories" (click)="selectCategory(category.id)" [class.selected]="selectedCategoryId === category.id">
+    <ion-label>{{ category.nombre }}</ion-label>
+    <ion-icon *ngIf="selectedCategoryId === category.id" slot="end" name="checkmark-circle-outline"></ion-icon>
+  </ion-item>
+</ion-list>

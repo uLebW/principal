@@ -35,7 +35,7 @@ export class ServPefilService {
     }
 
     const { data, error } = await this.supabase
-      .from('profiles') // Asegúrate de que este sea el nombre correcto de tu tabla
+      .from('profiles') 
       .select('*')
       .eq('id', userId)
       .single();
@@ -65,7 +65,7 @@ export class ServPefilService {
       .from('profiles')
       .upsert({
         id: userId,
-        correo: userEmail, // Asegúrate de guardar el correo
+        correo: userEmail, 
         ...perfilData
       }, { onConflict: 'id' }) // Si ya existe un perfil con ese ID, actualízalo
       .select() // Para obtener el registro actualizado
@@ -96,7 +96,7 @@ export class ServPefilService {
     const filePath = `${userId}/${fileName}`; // Carpeta por usuario
 
     const { data, error } = await this.supabase.storage
-      .from('avatars') // Asegúrate de que tengas un bucket llamado 'avatars' en Supabase Storage
+      .from('avatars') 
       .upload(filePath, file, {
         cacheControl: '3600',
         upsert: true // Sobrescribe si el archivo ya existe (útil para el mismo nombre)
@@ -111,8 +111,6 @@ export class ServPefilService {
 
   /**
    * Obtiene la URL pública de un archivo de avatar.
-   * @param path El path del archivo dentro del bucket (el valor de 'avatar' en la tabla 'profiles').
-   * @returns La URL pública del avatar.
    */
   getPublicUrl(path: string): string | null {
     if (!path) return null;
@@ -127,8 +125,7 @@ export class ServPefilService {
   // ==========================================================
 
   /**
-   * Obtiene todas las direcciones del usuario actual.
-   * Asume que la tabla de direcciones se llama 'direcciones' y tiene 'user_id'.
+   * Obtiene todas las direcciones del usuario actual..
    */
   async conseguirDrecc(): Promise<{ data: Direccion[] | null; error: any }> {
     const userId = await this.getUserId();
@@ -181,7 +178,7 @@ export class ServPefilService {
       .from('direcciones')
       .update(direccion)
       .eq('id', direccion.id)
-      .eq('user_id', userId) // Asegurarse de que el usuario solo actualice sus propias direcciones
+      .eq('user_id', userId)
       .select();
 
     if (error) {
@@ -203,7 +200,7 @@ export class ServPefilService {
       .from('direcciones')
       .delete()
       .eq('id', id)
-      .eq('user_id', userId); // Asegurarse de que el usuario solo elimine sus propias direcciones
+      .eq('user_id', userId); 
 
     if (error) {
       console.error('Error al eliminar dirección:', error.message);

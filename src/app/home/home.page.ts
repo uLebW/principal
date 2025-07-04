@@ -4,6 +4,7 @@ import { UserOptionComponent } from '../shared/components/user-option/user-optio
 import { Producto } from 'src/interfaces/producto';
 import { LoadingController } from '@ionic/angular';
 import { ProductosService } from '../services/productos.service';
+import { FiltrosComponent } from '../shared/filtros/filtros.component';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +15,12 @@ import { ProductosService } from '../services/productos.service';
 export class HomePage implements OnInit{
 
   productos: Producto[] = [];
+  filterPrd: Producto[] = [];
   cargandoProd: boolean = true;
   errorCarga: boolean = false;
+
+  searchTerm: string='';
+  selectedCategoryId: number |null = null;
 
   constructor(private popoverControl: PopoverController
     ,private loadContr: LoadingController,
@@ -37,31 +42,66 @@ export class HomePage implements OnInit{
     await popover.present();
   }
 
-  async cargaproductos(){
+   async cargaproductos() {
     this.cargandoProd = true;
     this.errorCarga = false;
     const cargando = await this.loadContr.create({
       message: 'Cargando inventario...',
-      spinner:'crescent'
+      spinner: 'crescent'
     });
     await cargando.present();
 
-    try{
-      const {data, error} = await this.servProd.getProductos();
+    try {
+ 
+      const { data, error } = await this.servProd.getProductos(this.searchTerm, this.selectedCategoryId);
 
-      if(error){
-        this.errorCarga= true;
-        this.presentAlert('Error', 'No se pudieron cargar los productos.')
-      }else if(data){
-        this.productos =data;
+      if (error) {
+        this.errorCarga = true;
+        this.presentAlert('Error', 'No se pudieron cargar los productos.');
+        console.error('Supabase error:', error.message);
+      } else if (data) {
+        this.productos = data; 
+        this.filterPrd = [...this.productos]; 
       }
-    }catch (error:any){
+    } catch (error: any) {
       this.errorCarga = true;
-      this.presentAlert('Error','Ocurrio un error inesperado');
-    } finally{
+      this.presentAlert('Error', 'Ocurrió un error inesperado');
+      console.error('Unexpected error:', error);
+    } finally {
       this.cargandoProd = false;
       await cargando.dismiss();
     }
+  }
+
+  onSearch(event:any){
+    this.searchTerm = event.detail.value.toLowerCase();
+    this.applyFilters();
+  }
+
+   // --- Category Filter Popover ---
+  async presentFilterPopover(ev: any) {
+    const popover = await this.popoverControl.create({
+      component: FiltrosComponent,
+      event: ev,
+      translucent: true,
+      componentProps: {
+        selectedCategoryId: this.selectedCategoryId, 
+      }
+    });
+
+    await popover.present();
+
+    const { data } = await popover.onDidDismiss();
+    if (data && data.categoryId !== undefined) { 
+      this.selectedCategoryId = data.categoryId;
+      this.applyFilters(); 
+    }
+  }
+
+ 
+  applyFilters() {
+
+    this.cargaproductos();
   }
 
 

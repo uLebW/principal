@@ -238,7 +238,6 @@ export class CarritoService {
 
     if (itemsPedidoError) {
       console.error('Error al insertar ítems del pedido:', itemsPedidoError.message);
-      // Opcional: revertir la creación del pedido si falla la inserción de ítems
       return { pedidoId: null, error: itemsPedidoError };
     }
 
