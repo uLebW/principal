@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <div class="centrado">
   <form [formGroup]="resetForm" (ngSubmit)="onRequestReset()">
     <ion-item>
       <ion-input label="Correo Electrónico" type="email" formControlName="email"
@@ -18,13 +19,14 @@
       <p *ngIf="resetForm.get('email')?.errors?.['email']">Ingresa un correo válido.</p>
     </ion-text>
 
-    <ion-button expand="block" type="submit" [disabled]="resetForm.invalid || isLoading">
+    <ion-button class="link" expand="block" type="submit" [disabled]="resetForm.invalid || isLoading">
       <ion-spinner *ngIf="isLoading" name="circles"></ion-spinner>
       <span *ngIf="!isLoading">Enviar Enlace de Restablecimiento</span>
     </ion-button>
   </form>
 
-  <p class="ion-text-center ion-margin-top">
+  <p class="ion-text-center ion-margin-top" style="color: black;">
     ¿Ya tienes una cuenta? <a routerLink="/login">Iniciar Sesión</a>
   </p>
+  </div>
 </ion-content>

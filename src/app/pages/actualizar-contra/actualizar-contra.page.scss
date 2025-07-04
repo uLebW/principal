@@ -1,0 +1,36 @@
+ion-content {
+  --background: rgb(188, 218, 218);
+
+}
+.centrado {
+  max-width: 40cap;
+  padding: 20px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+ion-toolbar{
+    --background:#ffff;
+    --color: #000;
+}
+
+form{
+    max-width: 500px; /* Limita el ancho de la tarjeta en pantallas grandes */
+    margin: 100px auto; /* Centra la tarjeta horizontalmente y le da margen */
+    box-shadow: 0 25px 25px rgba(0, 0, 0, 0.1); /* Sombra sutil para la tarjeta */
+  }
+
+  ion-item {
+  --background: #ffffff; // White background for input fields
+  --border-radius: 8px; // Slightly rounded corners for input fields
+  margin-bottom: 10px; // Space between input fields
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow
+  --padding-start: 10px; // Adjust padding if needed
+  --padding-end: 10px;
+  --color: rgba(0,0,0);
+}
+.link {
+  --background: #ffc107; // Orange/Amber
+  --background-activated: #e0ac00;
+  --color: #000; // Black text
+}

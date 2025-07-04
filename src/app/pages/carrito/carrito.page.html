@@ -27,7 +27,7 @@
   <div *ngIf="!isLoadingCart && !hasCartError && cartItems.length === 0" class="empty-cart-state">
     <ion-icon name="cart-outline" size="large"></ion-icon>
     <p>Tu carrito está vacío.</p>
-    <ion-button routerLink="/home">Explorar productos</ion-button>
+    <ion-button color="success" routerLink="/home">Explorar productos</ion-button>
   </div>
 
   <div *ngIf="!isLoadingCart && !hasCartError && cartItems.length > 0" class="cart-container">

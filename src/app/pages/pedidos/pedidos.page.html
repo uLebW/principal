@@ -25,10 +25,11 @@
     <ion-button routerLink="/home" fill="outline">Explorar Productos</ion-button>
   </div>
 
+  <div class="centrado">
   <ion-list *ngIf="!isLoading && !errorMe && pedidos.length > 0">
     <ion-card *ngFor="let pedido of pedidos">
       <ion-card-header>
-        <ion-card-title>Pedido #{{ pedido.id_pedido.substring(0, 8) }}...</ion-card-title>
+        <ion-card-title>Pedido #{{ pedido.id_pedido }}</ion-card-title>
         <ion-card-subtitle>Fecha: {{ formatDate(pedido.fecha_pedido) }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
@@ -57,4 +58,5 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
+  </div>
 </ion-content>

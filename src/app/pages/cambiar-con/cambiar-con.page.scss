@@ -1,0 +1,38 @@
+.actualizar {
+  --background: #8e72ff; // Purple/Violet
+  --background-activated: #7456e0;
+  --color: #ffffff; // White text
+}
+
+ion-content {
+  --background: rgb(188, 218, 218);
+
+}
+.centrado {
+  max-width: 40cap;
+  padding: 20px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+ion-toolbar{
+    --background:#ffff;
+    --color: #000;
+}
+
+
+form{
+    max-width: 500px; /* Limita el ancho de la tarjeta en pantallas grandes */
+    margin: 100px auto; /* Centra la tarjeta horizontalmente y le da margen */
+    box-shadow: 0 25px 25px rgba(0, 0, 0, 0.1); /* Sombra sutil para la tarjeta */
+  }
+
+  ion-item {
+  --background: #ffffff; 
+  --border-radius: 8px;
+  margin-bottom: 10px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  --padding-start: 10px; 
+  --padding-end: 10px;
+  --color: rgba(0,0,0);
+}

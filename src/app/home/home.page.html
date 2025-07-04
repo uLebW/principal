@@ -21,19 +21,6 @@
 <ion-content>
   <div class="main-content-layout">
 
-    <div class="daily-recommendation-block">
-      <ion-card class="recom">
-        <ion-card-header>
-          <ion-card-title style="color: black;">Recomendación del día</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <img src="assets/img/laptop-recommendation.jpg" alt="Laptop recomendada" />
-          <p>¡No te pierdas esta oferta increíble!</p>
-          <ion-button expand="block" routerLink="/pagina-producto">Ver producto</ion-button>
-        </ion-card-content>
-      </ion-card>
-    </div>
-
     <div *ngIf="cargandoProd" class="message-container">
       <ion-spinner name="circles"></ion-spinner>
       <p>Cargando productos...</p>
