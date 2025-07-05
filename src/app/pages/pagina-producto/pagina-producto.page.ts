@@ -114,7 +114,6 @@ export class PaginaProductoPage implements OnInit {
     await toast.dismiss(); // Cierra el toast de "Añadiendo..."
 
     if (error) {
-      console.error('Error al añadir al carrito:', error);
       this.presentToast('Error al añadir al carrito.', 'danger');
     } else if (data) {
       this.presentToast('Producto añadido al carrito.', 'success');

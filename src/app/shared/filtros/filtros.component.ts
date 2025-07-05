@@ -30,13 +30,13 @@ export class FiltrosComponent  implements OnInit {
       const { data, error } = await this.servProd.getCategorias();
 
       if (error) {
-        console.error('Error al cargar categorías:', error);
+        throw error;
      
       } else if (data) {
         this.categories = data;
       }
     } catch (error) {
-      console.error('Ocurrió un error inesperado al cargar categorías:', error);
+      throw error;
     }
   }
 

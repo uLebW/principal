@@ -58,7 +58,6 @@ export class HomePage implements OnInit{
       if (error) {
         this.errorCarga = true;
         this.presentAlert('Error', 'No se pudieron cargar los productos.');
-        console.error('Supabase error:', error.message);
       } else if (data) {
         this.productos = data; 
         this.filterPrd = [...this.productos]; 
@@ -66,7 +65,6 @@ export class HomePage implements OnInit{
     } catch (error: any) {
       this.errorCarga = true;
       this.presentAlert('Error', 'Ocurrió un error inesperado');
-      console.error('Unexpected error:', error);
     } finally {
       this.cargandoProd = false;
       await cargando.dismiss();

@@ -156,7 +156,6 @@ export class CarritoPage implements OnInit {
             await loading.dismiss();
 
             if (error) {
-              console.error('Error al vaciar el carrito:', error);
               this.presentAlert('Error', 'No se pudo vaciar el carrito. Inténtalo de nuevo.');
             } else if (success) {
               this.presentToast('Tu carrito ha sido vaciado.');
@@ -204,8 +203,6 @@ export class CarritoPage implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           handler: () => {
-            // El handler del botón Cancelar no necesita devolver un valor si solo cancela.
-            // Pero por consistencia, o si se espera un Promise<boolean>, podrías poner 'return false;'
             return false; // Indica al AlertController que no cierre el alert automáticamente.
           }
         },
@@ -214,7 +211,7 @@ export class CarritoPage implements OnInit {
           handler: async (data) => {
             if (!data.direccion || data.direccion.trim() === '') {
               this.presentToast('Por favor, ingresa una dirección de envío.');
-              return false; // **IMPORTANTE: No cierres el alert si la dirección está vacía.**
+              return false; 
             }
 
             const loading = await this.loadingController.create({
@@ -227,19 +224,14 @@ export class CarritoPage implements OnInit {
             await loading.dismiss();
 
             if (error) {
-              console.error('Error al procesar pedido:', error);
               this.presentAlert('Error en el Pedido', 'No se pudo completar tu pedido: ' + error.message);
-              return false; // **IMPORTANTE: Mantén el alert abierto o maneja el cierre según tu UI**
-                           // O si quieres que se cierre después del alert de error, usa 'return true;'
+              return false; 
             } else if (pedidoId) {
               this.presentAlert('¡Pedido Realizado!', `Tu pedido #${pedidoId} ha sido procesado exitosamente.`);
               this.loadItems(); // Vaciar la vista del carrito
-              return true; // **IMPORTANTE: Cierra el alert si el pedido fue exitoso.**
+              return true; 
             }
-
-            // Si por alguna razón ninguna de las condiciones anteriores se cumple,
-            // asegura un retorno. Por ejemplo, si 'pedidoId' es null sin error.
-            return false; // O 'true' dependiendo de si quieres que se cierre en este caso.
+            return false; 
           },
         },
       ],

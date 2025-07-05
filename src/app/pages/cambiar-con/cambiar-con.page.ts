@@ -60,7 +60,6 @@ export class CambiarConPage implements OnInit {
       const { data, error } = await this.authService.updatePassword(newPassword);
 
       if (error) {
-        console.error('Error al actualizar contraseña:', error.message);
         this.presentAlert('Error', `No se pudo actualizar tu contraseña: ${error.message}`);
       } else {
         this.presentAlert(
@@ -70,7 +69,6 @@ export class CambiarConPage implements OnInit {
         this.router.navigateByUrl('/login'); // Redirige a la página de inicio de sesión
       }
     } catch (e: any) {
-      console.error('Error inesperado al actualizar contraseña:', e);
       this.presentAlert('Error', 'Ocurrió un error inesperado. Inténtalo de nuevo.');
     } finally {
       this.isLoading = false;

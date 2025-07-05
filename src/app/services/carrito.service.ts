@@ -29,7 +29,6 @@ export class CarritoService {
       .maybeSingle();
 
     if (selectError) {
-      console.error('Error al buscar carrito:', selectError.message);
       return { Carrito: null, error: selectError };
     }
 
@@ -42,7 +41,6 @@ export class CarritoService {
         .single();
 
       if (insertError) {
-        console.error('Error al crear Carrito:', insertError.message);
         return { Carrito: null, error: insertError };
       }
       Carrito = newCarrito;
@@ -109,7 +107,6 @@ export class CarritoService {
 
     let resultado;
      if (itemExist) {
-  console.log('Actualizando ítem existente. ID:', itemExist.id_item, 'Nueva cantidad:', itemExist.cantidad + cantidad);
   resultado = await this.supabase
     .from('items_carrito')
     .update({ cantidad: itemExist.cantidad + cantidad })
@@ -117,7 +114,6 @@ export class CarritoService {
     .select('*')
     .single();
 } else {
-  console.log('Insertando nuevo ítem. ID Carrito:', Carrito.id_carrito, 'ID Producto:', prodcutoId, 'Cantidad:', cantidad, 'Precio:', producto.precio);
   resultado = await this.supabase
     .from('items_carrito')
     .insert({
@@ -131,7 +127,7 @@ export class CarritoService {
 }
 
     if(resultado.error){
-      console.error('Error al añadir o actualizar Carrito', resultado.error.message);
+      throw resultado.error;
     }
     return {data: resultado.data as ItemCarrito, error: resultado.error};
   }
@@ -154,7 +150,7 @@ export class CarritoService {
       .single();
 
     if (error) {
-      console.error('Error al actualizar cantidad del ítem:', error.message);
+      throw error;
     }
     return { data: data as ItemCarrito, error };
   }

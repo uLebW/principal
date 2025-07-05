@@ -67,14 +67,12 @@ export class PerfilPage implements OnInit {
       // Cargar direcciones
       const { data: direcciones, error: dirError } = await this.servPerfilService.conseguirDrecc();
       if (dirError) {
-        console.error('Error al cargar direcciones:', dirError.message);
         this.presentAlert('Error', 'No se pudieron cargar las direcciones.');
       } else if (direcciones) {
         this.addresses = direcciones;
       }
 
     } catch (error: any) {
-      console.error('Error al cargar datos del perfil:', error.message);
       this.presentAlert('Error', `Ocurrió un error al cargar tu perfil: ${error.message}`);
     } finally {
       await loading.dismiss();
@@ -104,7 +102,6 @@ export class PerfilPage implements OnInit {
 
       this.presentAlert('Éxito', 'Avatar actualizado correctamente.');
     } catch (error: any) {
-      console.error('Error al subir o actualizar avatar:', error.message);
       this.presentAlert('Error', `No se pudo subir el avatar: ${error.message}`);
     } finally {
       await loading.dismiss();
@@ -126,7 +123,6 @@ export class PerfilPage implements OnInit {
       await this.servPerfilService.actualizarPerfil(this.profileForm.value);
       this.presentAlert('Éxito', 'Perfil actualizado correctamente.');
     } catch (error: any) {
-      console.error('Error al guardar el perfil:', error.message);
       this.presentAlert('Error', `No se pudieron guardar los cambios: ${error.message}`);
     } finally {
       await loading.dismiss();
@@ -166,7 +162,6 @@ export class PerfilPage implements OnInit {
       this.mostrarDireccForm = false;
       await this.loadProfileData(); // Recargar todas las direcciones
     } catch (error: any) {
-      console.error('Error al guardar dirección:', error.message);
       this.presentAlert('Error', `No se pudo guardar la dirección: ${error.message}`);
     } finally {
       await loading.dismiss();
@@ -204,7 +199,6 @@ export class PerfilPage implements OnInit {
               this.presentAlert('Éxito', 'Dirección eliminada correctamente.');
               await this.loadProfileData(); // Recargar direcciones
             } catch (error: any) {
-              console.error('Error al eliminar dirección:', error.message);
               this.presentAlert('Error', `No se pudo eliminar la dirección: ${error.message}`);
             } finally {
               await loading.dismiss();

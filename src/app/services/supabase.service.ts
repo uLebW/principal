@@ -19,15 +19,12 @@ export class SupabaseService {
 
     this.supabase.auth.onAuthStateChange((event, sess) => {
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        console.log('SET USER')
 
         this.currentUser.next(sess.user)
       } else if (event === 'SIGNED_OUT') {
-        console.log('SET USER - SIGNED OUT')
         this.currentUser.next(false)
         this.router.navigateByUrl('/login', { replaceUrl: true })
       } else {
-        console.log('Auth: ', event);
         this.currentUser.next(false)
       }
     })
@@ -97,7 +94,6 @@ export class SupabaseService {
     },{onConflict: 'id'});
 
     if (error){
-      console.error('Error al gurdar el perfil');
       throw error;
     }
     return data
@@ -118,7 +114,6 @@ export class SupabaseService {
       .single(); // Esperamos solo un resultado
 
     if (error && error.code !== 'PGRST116') { // PGRST116 es "no rows found"
-      console.error('Error al obtener el perfil:', error.message);
       throw error;
     }
     return data;

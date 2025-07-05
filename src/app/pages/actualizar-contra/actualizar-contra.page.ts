@@ -62,16 +62,12 @@ export class ActualizarContraPage implements OnInit {
     await loading.present();
 
     const email = this.resetForm.value.email;
-    // IMPORTANTE: Asegúrate de que esta URL de redirección exista en tu app y en Supabase Auth -> URL Configuration
-    // Esta URL es a donde Supabase redirigirá al usuario DESPUÉS de hacer clic en el enlace del correo.
-    // Sugiero que sea la página donde establecerá la nueva contraseña (update-password).
     const redirectToUrl = `${window.location.origin}/cambiar-con`;
 
     try {
       const { data, error } = await this.authService.requestPasswordReset(email, redirectToUrl);
 
       if (error) {
-        console.error('Error al solicitar restablecimiento:', error.message);
         this.presentAlert('Error', `No se pudo enviar el correo de restablecimiento: ${error.message}`);
       } else {
         this.presentAlert(
@@ -81,7 +77,6 @@ export class ActualizarContraPage implements OnInit {
         this.router.navigateByUrl('/login'); // O a una página de confirmación
       }
     } catch (e: any) {
-      console.error('Error inesperado al solicitar restablecimiento:', e);
       this.presentAlert('Error', 'Ocurrió un error inesperado. Inténtalo de nuevo.');
     } finally {
       this.isLoading = false;

@@ -41,7 +41,6 @@ export class ServPefilService {
       .single();
 
     if (error && error.code !== 'PGRST116') { // PGRST116 es "no rows found"
-      console.error('Error al obtener el perfil:', error.message);
       throw error;
     }
     return data as Perfil; // Retorna null si no se encuentra (PGRST116)
@@ -72,7 +71,6 @@ export class ServPefilService {
       .single();
 
     if (error) {
-      console.error('Error al actualizar el perfil:', error.message);
       throw error;
     }
     return data as Perfil;
@@ -103,7 +101,6 @@ export class ServPefilService {
       });
 
     if (error) {
-      console.error('Error al subir el avatar:', error.message);
       throw error;
     }
     return data.path; // Retorna el path dentro del bucket, e.g., "usuario_id/imagen.png"
@@ -157,7 +154,7 @@ export class ServPefilService {
       .select(); // Para obtener el registro insertado
 
     if (error) {
-      console.error('Error al añadir dirección:', error.message);
+      throw error;
     }
     return { data: data as Direccion[], error };
   }
@@ -182,7 +179,7 @@ export class ServPefilService {
       .select();
 
     if (error) {
-      console.error('Error al actualizar dirección:', error.message);
+     throw error.message;
     }
     return { data: data as Direccion[], error };
   }
@@ -203,7 +200,7 @@ export class ServPefilService {
       .eq('user_id', userId); 
 
     if (error) {
-      console.error('Error al eliminar dirección:', error.message);
+      throw error;
     }
     return { data, error };
   }

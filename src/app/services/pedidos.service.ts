@@ -17,7 +17,6 @@ export class PedidosService {
     const { data: user, error: userError } = await this.supabase.auth.getUser();
 
     if (userError || !user?.user) {
-      console.error('Error al obtener usuario autenticado:', userError);
       return { data: null, error: userError || new Error('Usuario no autenticado.') };
     }
 
@@ -43,7 +42,6 @@ export class PedidosService {
       .order('fecha_pedido', { ascending: false }); // Ordenar por fecha, los más recientes primero
 
     if (pedidosError) {
-      console.error('Error al obtener los pedidos:', pedidosError);
       return { data: null, error: pedidosError };
     }
 

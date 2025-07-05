@@ -33,7 +33,6 @@ export class ProductosService {
 
       return { data: data as Producto[], error };
     } catch (error) {
-      console.error('Error in getProductos service:', error);
       return { data: null, error }; 
     }
   }
@@ -47,7 +46,6 @@ export class ProductosService {
 
       return { data: data as Categoria[], error };
     } catch (error) {
-      console.error('Error in getCategorias service:', error);
       return { data: null, error };
     }
   }
@@ -60,7 +58,7 @@ export class ProductosService {
       .single();
 
     if (error) {
-      console.error(`Error al obtener el producto con ID ${id}:`, error.message);
+      throw error;
     }
     return { data: data as Producto, error };
   }
