@@ -22,3 +22,5 @@ para el arreglo de bugs o defectos se usará
 
 # LINK DE PAGINA
 https://kolmeta-7314b.web.app/
+
+# CODIGO EN LA RAMA DE MASTER
